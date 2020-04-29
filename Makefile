@@ -36,7 +36,6 @@ check: all
 
 # Unit tests
 do_stuff_unittest: do_stuff_unittest.cpp my_api.a
-	exit 1
 	${CXX} ${CXXFLAGS} $< my_api.a -o $@
 
 # Fuzz target, links against $LIB_FUZZING_ENGINE, so that
