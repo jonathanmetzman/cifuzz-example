@@ -31,3 +31,4 @@ jobs:
        FAILURE: ${{ failure() }}
        BUILD: ${{ steps.build.outcome }}
        RUN: ${{ steps.run.outcome }}
+    run: "echo $FAILURE $BUILD $RUN"
