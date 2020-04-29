@@ -20,7 +20,7 @@ jobs:
        dry-run: false
    - name: Upload Crash
      uses: actions/upload-artifact@v1
-     if: failure() && steps.build.outcome == 'success' && steps.fuzz.outcome == 'failure'
+     if: steps.build.outcome == 'success' && steps.fuzz.outcome == 'failure'
      with:
        name: artifacts
        path: ./out/artifacts
