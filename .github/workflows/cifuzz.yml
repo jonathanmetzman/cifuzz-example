@@ -5,14 +5,14 @@ jobs:
    runs-on: ubuntu-latest
    steps:
    - name: Build Fuzzers
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
+     uses: jonathanmetzman/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        dry-run: false
    - name: Run Fuzzers
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
+     uses: jonathanmetzman/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
      with:
-       oss-fuzz-project-name: 'example'
+       oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
        dry-run: false
    - name: Upload Crash
