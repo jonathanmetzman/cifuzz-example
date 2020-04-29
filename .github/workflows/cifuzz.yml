@@ -25,10 +25,3 @@ jobs:
        name: artifacts
        path: ./out/artifacts
 
-  - name: print
-     if: failure()
-     env:
-       FAILURE: ${{ failure() }}
-       BUILD: ${{ steps.build.outcome }}
-       RUN: ${{ steps.run.outcome }}
-    run: "echo $FAILURE $BUILD $RUN"
