@@ -9,6 +9,7 @@ jobs:
      uses: jonathanmetzman/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
        oss-fuzz-project-name: 'cifuzz-example'
+       allowed_broken_targets_percentage: 100
        dry-run: false
    - name: Run Fuzzers
      id: run
