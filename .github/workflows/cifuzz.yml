@@ -8,7 +8,6 @@ jobs:
      id: build
      uses: jonathanmetzman/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
-       allow_broken_fuzz_target_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
        dry-run: false
    - name: Run Fuzzers
@@ -24,4 +23,3 @@ jobs:
      with:
        name: artifacts
        path: ./out/artifacts
-
