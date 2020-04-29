@@ -8,6 +8,7 @@ jobs:
      id: build
      uses: jonathanmetzman/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
+       allow_broken_fuzz_target_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
        dry-run: false
    - name: Run Fuzzers
@@ -19,7 +20,7 @@ jobs:
        dry-run: false
    - name: Upload Crash
      uses: actions/upload-artifact@v1
-     if: failure() && steps.build.outcome == 'success'
+     if: steps.build.outcome == 'success' && failure() && steps.run.outcome == 'failure'
      with:
        name: artifacts
        path: ./out/artifacts
