@@ -25,7 +25,7 @@ jobs:
        name: artifacts
        path: ./out/artifacts
 
-    - name: print
+  - name: print
      if: failure()
      env:
        FAILURE: ${{ failure() }}
