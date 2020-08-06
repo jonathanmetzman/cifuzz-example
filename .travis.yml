@@ -1,0 +1,5 @@
+services:
+  - docker
+
+script:
+- REPO_NAME='cifuzz-example' COMMIT_SHA=TRAVIS_PULL_REQUEST_SHA ./travis-cifuzz.bash
