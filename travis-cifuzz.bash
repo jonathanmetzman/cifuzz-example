@@ -4,7 +4,7 @@ git clone https://github.com/google/oss-fuzz.git
 docker pull gcr.io/oss-fuzz-base/cifuzz-base:latest
 
 docker build -t build_fuzzers oss-fuzz/infra/cifuzz/actions/build_fuzzers
-docker build -t build_fuzzers oss-fuzz/infra/cifuzz/actions/run_fuzzers
+docker build -t run_fuzzers oss-fuzz/infra/cifuzz/actions/run_fuzzers
 
 # export GITHUB_REPOSITORY=$REPO_NAME
 export GITHUB_REPOSITORY=$REPO_NAME
