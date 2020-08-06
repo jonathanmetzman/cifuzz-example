@@ -1,5 +1,7 @@
 #! /bin/bash
 
+set -x
+
 git clone https://github.com/google/oss-fuzz.git --depth 1
 docker pull gcr.io/oss-fuzz-base/cifuzz-base:latest
 
