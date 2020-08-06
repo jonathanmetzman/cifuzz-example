@@ -24,8 +24,11 @@ docker build -t gcr.io/oss-fuzz-base/build_fuzzers oss-fuzz/infra/cifuzz/actions
 docker build -t gcr.io/oss-fuzz-base/run_fuzzers oss-fuzz/infra/cifuzz/actions/run_fuzzers
 
 # export GITHUB_REPOSITORY=$REPO_NAME
-# TODO: Make this unneeded.
+
+# TODO: Make these not required.
 export GITHUB_EVENT_NAME="push"
+export GITHUB_REPOSITORY=$REPO_NAME
+
 export DRY_RUN=0
 export CI=true
 export SANITIZER='address'
