@@ -20,7 +20,7 @@ int main(int argc, char **argv) {
   TestDoStuff("", 0);
   TestDoStuff("foo", 1);
   TestDoStuff("omg", 1);
-  TestDoStuff("bar", 1);
+  TestDoStuff("bar2", 1);
   TestDoStuff("ouch", 1);
   TestDoStuff("foobar", 3);
   TestDoStuff("foouchbar", 4);
