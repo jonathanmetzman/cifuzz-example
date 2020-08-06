@@ -1,8 +1,21 @@
-#! /bin/bash
+#!/bin/bash
+# Copyright 2020 Google LLC
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#      http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+################################################################################
 
 set -ex
-
-echo "hi"
 
 git clone https://github.com/google/oss-fuzz.git --depth 1
 docker pull gcr.io/oss-fuzz-base/cifuzz-base:latest
@@ -11,8 +24,7 @@ docker build -t gcr.io/oss-fuzz-base/build_fuzzers oss-fuzz/infra/cifuzz/actions
 docker build -t gcr.io/oss-fuzz-base/run_fuzzers oss-fuzz/infra/cifuzz/actions/run_fuzzers
 
 # export GITHUB_REPOSITORY=$REPO_NAME
-export GITHUB_REPOSITORY=$REPO_NAME
-# TODO: Make this optional.
+# TODO: Make this unneeded.
 export GITHUB_EVENT_NAME="push"
 export DRY_RUN=0
 export CI=true
