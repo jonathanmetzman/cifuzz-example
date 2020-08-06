@@ -1,6 +1,6 @@
 #! /bin/bash
 
-git clone https://github.com/google/oss-fuzz.git
+git clone https://github.com/google/oss-fuzz.git --depth 1
 docker pull gcr.io/oss-fuzz-base/cifuzz-base:latest
 
 docker build -t build_fuzzers oss-fuzz/infra/cifuzz/actions/build_fuzzers
