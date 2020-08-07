@@ -39,6 +39,6 @@ mkdir $WORKDIR
 export GITHUB_WORKSPACE=$WORKDIR
 echo "OSS_FUZZ_PROJECT_NAME $OSS_FUZZ_PROJECT_NAME"
 
-docker run --name build_fuzzers --rm -ti -e MANUAL_SRC_PATH -e OSS_FUZZ_PROJECT_NAME -e GITHUB_WORKSPACE -e GITHUB_REPOSITORY -e GITHUB_EVENT_NAME -e DRY_RUN -e CI -e SANITIZER -e GITHUB_SHA -v /var/run/docker.sock:/var/run/docker.sock -v $WORKDIR:$WORKDIR gcr.io/oss-fuzz-base/build_fuzzers
+docker run --name build_fuzzers --rm -ti -e MANUAL_SRC_PATH -e OSS_FUZZ_PROJECT_NAME -e GITHUB_WORKSPACE -e GITHUB_REPOSITORY -e GITHUB_EVENT_NAME -e DRY_RUN -e CI -e SANITIZER -e GITHUB_SHA -v $MANUAL_SRC_PATH:$MANUAL_SRC_PATH -v /var/run/docker.sock:/var/run/docker.sock -v $WORKDIR:$WORKDIR gcr.io/oss-fuzz-base/build_fuzzers
 
 docker run --name run_fuzzers --rm -ti -e OSS_FUZZ_PROJECT_NAME -e GITHUB_WORKSPACE -e GITHUB_REPOSITORY -e GITHUB_EVENT_NAME -e DRY_RUN -e CI -e SANITIZER -e GITHUB_SHA -v /var/run/docker.sock:/var/run/docker.sock -v $WORKDIR:$WORKDIR gcr.io/oss-fuzz-base/run_fuzzers
