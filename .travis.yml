@@ -1,5 +1,10 @@
+dist: xenial
+
 services:
   - docker
 
+before_install:
+  - git fetch origin +refs/heads/$TRAVIS_BRANCH
+
 script:
-- REPO_NAME='cifuzz-example' COMMIT_SHA=TRAVIS_PULL_REQUEST_SHA ./travis-cifuzz.bash
+- MANUAL_SRC_PATH=$PWD OSS_FUZZ_PROJECT_NAME='cifuzz-example' REPO_NAME='cifuzz-example' COMMIT_SHA=$TRAVIS_PULL_REQUEST_SHA ./cifuzz.bash
