@@ -10,7 +10,7 @@ jobs:
    steps:
    - name: Build Fuzzers (${{ matrix.sanitizer }})
      id: build
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@entrypoints
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-cov
      with:
        allowed_broken_targets_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
@@ -18,7 +18,7 @@ jobs:
        sanitizer: ${{ matrix.sanitizer }}
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@entrypoints
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-cov
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
