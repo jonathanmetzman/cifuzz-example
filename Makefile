@@ -38,12 +38,13 @@ check: all
 do_stuff_unittest: do_stuff_unittest.cpp my_api.a
 	${CXX} ${CXXFLAGS} $< my_api.a -o $@
 
-# Fuzz target, links against $LIB_FUZZING_ENGINE, so that
-# you may choose which fuzzing engine to use.
+# do_stuff_fuzzer2: do_stuff_fuzzer.cpp my_api.a standalone_fuzz_target_runner.o
+# 	${CXX} ${CXXFLAGS} $< my_api.a ${LIB_FUZZING_ENGINE} -o $@
+# 	zip -q -r do_stuff_fuzzer_seed_corpus.zip do_stuff_test_data
+
 do_stuff_fuzzer: do_stuff_fuzzer.cpp my_api.a standalone_fuzz_target_runner.o
 	${CXX} ${CXXFLAGS} $< my_api.a ${LIB_FUZZING_ENGINE} -o $@
 	zip -q -r do_stuff_fuzzer_seed_corpus.zip do_stuff_test_data
-
 
 # The library itself.
 my_api.a: my_api.cpp my_api.h
