@@ -27,7 +27,7 @@ CXXFLAGS += -std=c++11
 all: do_stuff_unittest do_stuff_fuzzer
 
 clean:
-	exit 1
+	rm -fv *.a *.o *unittest *_fuzzer *_seed_corpus.zip crash-* *.zip
 
 # Continuos integration system should run "make clean && make check"
 check: all
