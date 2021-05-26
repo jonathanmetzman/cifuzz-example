@@ -27,7 +27,7 @@ jobs:
        sanitizer: ${{ matrix.sanitizer }}
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-artifacts-skeleton
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-artifacts-skeleton
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
