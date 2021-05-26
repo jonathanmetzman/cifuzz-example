@@ -1,45 +1,41 @@
 name: CIFuzz
-true:
+on:
   pull_request:
     paths:
-    - '**'
+      - '**'
   push:
     branches:
-    - master
+      - master
+
 jobs:
-  Fuzzing:
-    runs-on: ubuntu-latest
-    steps:
-    - name: echo env vars
-      run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF
-        GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF
-        $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
-    - id: build
-      name: Build Fuzzers (${{ matrix.sanitizer }})
-      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-artifacts-skeleton
-      with:
-        allowed_broken_targets_percentage: 100
-        dry-run: false
-        oss-fuzz-project-name: cifuzz-example
-        sanitizer: ${{ matrix.sanitizer }}
-    - id: run
-      name: Run Fuzzers (${{ matrix.sanitizer }})
-      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-artifacts-skeleton
-      with:
-        dry-run: false
-        fuzz-seconds: 600
-        oss-fuzz-project-name: cifuzz-example
-        sanitizer: ${{ matrix.sanitizer }}
-    - if: failure() && steps.build.outcome == 'success'
-      name: Upload Crash
-      uses: actions/upload-artifact@v1
-      with:
-        name: artifacts
-        path: ./out/artifacts
-    strategy:
-      fail-fast: false
-      matrix:
-        sanitizer:
-        - address
-        - undefined
-        - memory
+ Fuzzing:
+   runs-on: ubuntu-latest
+   strategy:
+     fail-fast: false
+     matrix:
+       sanitizer: [address, undefined, memory]
+   steps:
+   - name: echo env vars
+     run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
+   - name: Build Fuzzers (${{ matrix.sanitizer }})
+     id: build
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@docker-registry
+     with:
+       allowed_broken_targets_percentage: 100
+       oss-fuzz-project-name: 'cifuzz-example'
+       dry-run: false
+       sanitizer: ${{ matrix.sanitizer }}
+   - name: Run Fuzzers (${{ matrix.sanitizer }})
+     id: run
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@docker-registry
+     with:
+       oss-fuzz-project-name: 'cifuzz-example'
+       fuzz-seconds: 600
+       dry-run: false
+       sanitizer: ${{ matrix.sanitizer }}
+   - name: Upload Crash
+     uses: actions/upload-artifact@v1
+     if: failure() && steps.build.outcome == 'success'
+     with:
+       name: artifacts
+       path: ./out/artifacts
