@@ -13,25 +13,23 @@ jobs:
    strategy:
      fail-fast: false
      matrix:
-       sanitizer: [address, undefined, memory]
+       sanitizer: [address, undefined, memory, coverage]
    steps:
    - name: echo env vars
      run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
    - name: Build Fuzzers (${{ matrix.sanitizer }})
      id: build
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-run_fuzzers_fix
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-coverage
      with:
        allowed_broken_targets_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
-       dry-run: false
        sanitizer: ${{ matrix.sanitizer }}
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-run_fuzzers_fix
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-coverage
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
-       dry-run: false
        sanitizer: ${{ matrix.sanitizer }}
    - name: Upload Crash
      uses: actions/upload-artifact@v1
