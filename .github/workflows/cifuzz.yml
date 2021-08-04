@@ -28,7 +28,7 @@ jobs:
        bad-build-check: false
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-coverage-report
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-workspace
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
