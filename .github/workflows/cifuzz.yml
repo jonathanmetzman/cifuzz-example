@@ -35,11 +35,12 @@ jobs:
        sanitizer: ${{ matrix.sanitizer }}
    - name: Upload Crash
      uses: actions/upload-artifact@v1
-     if: failure() && steps.build.outcome == 'success'
+     if: steps.run.outcome == 'fail' && steps.build.outcome == 'success'
      with:
        name: artifacts
        path: ./out/artifacts
    - name: Upload Sarif
+     if: ${{ always() }}
      uses: github/codeql-action/upload-sarif@v2
      with:
        # Path to SARIF file relative to the root of the repository
