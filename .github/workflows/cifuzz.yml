@@ -41,6 +41,7 @@ jobs:
        path: ./out/artifacts
    # - uses: actions/checkout@v3
    - name: tree
+     if: ${{ always() }}
      run: tree
    - name: Upload Sarif
      if: ${{ always() }}
