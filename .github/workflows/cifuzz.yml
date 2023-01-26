@@ -39,6 +39,7 @@ jobs:
      with:
        name: artifacts
        path: ./out/artifacts
+   - uses: actions/checkout@v3
    - name: tree
      run: tree
    - name: Upload Sarif
