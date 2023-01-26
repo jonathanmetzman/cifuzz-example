@@ -40,7 +40,7 @@ jobs:
        name: artifacts
        path: ./out/artifacts
    - name: tree
-     run: tree .
+     run: tree
    - name: Upload Sarif
      if: ${{ always() }}
      uses: github/codeql-action/upload-sarif@v2
