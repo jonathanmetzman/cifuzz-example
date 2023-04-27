@@ -20,7 +20,7 @@ jobs:
      run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
    - name: Build Fuzzers (${{ matrix.sanitizer }})
      id: build
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-sarif/pip/infra/cifuzz/requests-2.27.1
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-sarif
      with:
        allowed_broken_targets_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
@@ -28,7 +28,7 @@ jobs:
        bad-build-check: false
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-sarif/pip/infra/cifuzz/requests-2.27.1
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-sarif
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
@@ -39,13 +39,9 @@ jobs:
      with:
        name: artifacts
        path: ./out/artifacts
-   # - uses: actions/checkout@v3
-   # - name: tree
-   #   if: ${{ always() }}
-   #   run: tree
-   # - name: Upload Sarif
-   #   if: ${{ always() }}
-   #   uses: github/codeql-action/upload-sarif@v2
-   #   with:
-   #     # Path to SARIF file relative to the root of the repository
-   #     sarif_file: cifuzz-sarif/results.sarif
+   - name: Upload Sarif
+     if: ${{ always() }}
+     uses: github/codeql-action/upload-sarif@v2
+     with:
+       # Path to SARIF file relative to the root of the repository
+       sarif_file: cifuzz-sarif/results.sarif
