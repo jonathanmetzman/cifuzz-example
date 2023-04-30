@@ -33,6 +33,7 @@ jobs:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
        sanitizer: ${{ matrix.sanitizer }}
+       output-sarif: true
    - name: Upload Crash
      uses: actions/upload-artifact@v3
      if: failure() && steps.build.outcome == 'success'
