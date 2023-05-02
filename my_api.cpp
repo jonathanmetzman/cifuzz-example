@@ -29,7 +29,7 @@ size_t DoStuff(const std::string &str) {
 int vuln(char x) {
   if (x == 'a') {
     int* x = (int*) malloc(4);
-    // free(x);
+    free(x);
     return x[0];
   }
   return 0;
