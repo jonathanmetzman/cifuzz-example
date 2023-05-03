@@ -26,17 +26,16 @@ size_t DoStuff(const std::string &str) {
   return Vec[Idx];
 }
 
-
-int vulnerable2(char x) {
-  return vulnerable3(x);
-}
-
 int vulnerable3(char x) {
   if (x == 'a') {
     int* x = (int*) malloc(4);
     free(x);
     return x[0];
   }
+}
+
+int vulnerable2(char x) {
+  return vulnerable3(x);
 }
 
 int vuln(char x) {
