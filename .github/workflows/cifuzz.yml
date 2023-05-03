@@ -19,7 +19,7 @@ jobs:
      run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
    - name: Build Fuzzers (${{ matrix.sanitizer }})
      id: build
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-bugfix
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
        allowed_broken_targets_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
@@ -28,7 +28,7 @@ jobs:
        output-sarif: true
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-bugfix
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
