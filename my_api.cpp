@@ -26,9 +26,6 @@ size_t DoStuff(const std::string &str) {
   return Vec[Idx];
 }
 
-int vuln0(char x) {
-  return vulnerable2(x);
-}
 
 int vulnerable2(char x) {
   return vulnerable3(x);
@@ -40,4 +37,8 @@ int vulnerable3(char x) {
     free(x);
     return x[0];
   }
+}
+
+int vuln(char x) {
+  return vulnerable2(x);
 }
