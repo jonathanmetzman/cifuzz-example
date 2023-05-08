@@ -6,10 +6,15 @@ on:
   push:
     branches:
       - master
+      
+permissions: {}
 
 jobs:
  Fuzzing:
    runs-on: ubuntu-latest
+   permissions:
+     contents: read
+     id-token: write
    strategy:
      fail-fast: false
      matrix:
@@ -19,7 +24,7 @@ jobs:
      run: echo "GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_BASE_REF $GITHUB_BASE_REF GITHUB_REF $GITHUB_REF GITHUB_HEAD_REF $GITHUB_HEAD_REF GITHUB_ACTION_REF $GITHUB_ACTION_REF GITHUB_SHA $GITHUB_SHA"
    - name: Build Fuzzers (${{ matrix.sanitizer }})
      id: build
-     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-diff
+     uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@master
      with:
        allowed_broken_targets_percentage: 100
        oss-fuzz-project-name: 'cifuzz-example'
@@ -27,7 +32,7 @@ jobs:
        sanitizer: ${{ matrix.sanitizer }}
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
-     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-diff
+     uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@master
      with:
        oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
