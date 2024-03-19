@@ -29,8 +29,8 @@ size_t DoStuff(const std::string &str) {
 int vulnerable3(char x) {
   if (x == 'a') {
     int* x = (int*) malloc(4);
-    free(x);
-    return x[0];
+    // free(x);
+    return x[2000];
   }
 }
 
