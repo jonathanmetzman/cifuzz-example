@@ -6,3 +6,4 @@
 #include <string>
 
 size_t DoStuff(const std::string &str);
+int vuln(char x);

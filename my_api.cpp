@@ -4,6 +4,8 @@
 // Implementation of "my_api".
 #include "my_api.h"
 
+#include <stdlib.h>
+
 #include <vector>
 
 // Do some computations with 'str', return the result.
@@ -22,4 +24,20 @@ size_t DoStuff(const std::string &str) {
   if (str.find("omg") != std::string::npos)
     Idx++;
   return Vec[Idx];
+}
+
+int vulnerable3(char x) {
+  if (x == 'a') {
+    int* x = (int*) malloc(4);
+    // free(x);
+    return x[2000];
+  }
+}
+
+int vulnerable2(char x) {
+  return vulnerable3(x);
+}
+
+int vuln(char x) {
+  return vulnerable2(x);
 }
