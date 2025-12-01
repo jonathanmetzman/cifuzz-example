@@ -22,14 +22,12 @@ jobs:
      uses: google/oss-fuzz/infra/cifuzz/actions/build_fuzzers@cifuzz-ubuntu-24-04-v2
      with:
        allowed_broken_targets_percentage: 100
-       oss-fuzz-project-name: 'cifuzz-example'
        dry-run: false
        sanitizer: ${{ matrix.sanitizer }}
    - name: Run Fuzzers (${{ matrix.sanitizer }})
      id: run
      uses: google/oss-fuzz/infra/cifuzz/actions/run_fuzzers@cifuzz-ubuntu-24-04-v2
      with:
-       oss-fuzz-project-name: 'cifuzz-example'
        fuzz-seconds: 600
        dry-run: false
        sanitizer: ${{ matrix.sanitizer }}
